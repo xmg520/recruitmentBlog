@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="sogou_site_verification" content="9KZfhacIwS"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/frontend/base.css}">
+    <title>IT各大砖厂招聘信息网</title>
+    <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+</head>
+
+<body class="animated fadeIn">
+<div id="index-app" class="wrapper">
+    <header>
+        <div class="headtop"></div>
+        <div class="contenttop">
+            <div class="logo f_l"> IT各大砖厂招聘信息网</div>
+            <div class="blank"></div>
+            <nav>
+                <div class="navigation">
+                    <ul class="menu">
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(749)">长沙</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(530)">北京</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(538)">上海</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(763)">广州</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(765)">深圳</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(653)">杭州</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <SCRIPT type=text/javascript>
+                // Navigation Menu
+                $(function () {
+                    $(".menu ul").css({
+                        display: "none"
+                    }); // Opera Fix
+                    $(".menu li").hover(function () {
+                        $(this).find('ul:first').css({
+                            visibility: "visible",
+                            display: "none"
+                        }).slideDown("normal");
+                    }, function () {
+                        $(this).find('ul:first').css({
+                            visibility: "hidden"
+                        });
+                    });
+                });
+
+                function search() {
+                    var s = $('#keyboard').val();
+                    location.href = s === "" ? "/" : "/pages?searchStr=" + s;
+                };
+
+                function goto() {
+                    var url = window.location.href;
+                    var winObj = window.open('/api/qq?url=' + url, '_self');
+                }
+            </SCRIPT>
+
+        </div>
+    </header>
+    <div class="jztop"></div>
+    <div id="main-body" class="layui-container">
+        <div class="layui-row layui-col-space10">
+
+            <div id="article-list" class="layui-col-md9">
+                <h3 class="tit" th:text="${info.jobName}"></h3>
+                <div style="padding: 20px; background-color: #F2F2F2;">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">薪水</div>
+                                <div class="layui-card-body" th:text="${info.salary}"></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">福利待遇</div>
+                                <div class="layui-card-body" th:text="${info.welfare}"></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">岗位要求</div>
+                                <div class="layui-card-body" th:text="${info.responsibility}"></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-header">工作地址</div>
+                                <div class="layui-card-body" th:text="${info.place}"></div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md12">
+                            <button class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal layui-btn-fluid">申请岗位</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="layui-col-md3">
+                <div id="affix-side">
+                    <div class="layui-tab layui-tab-card layui-article-cate layui-hide-xs" slot="callme">
+                        <div class="layui-tab-content select-none">
+                            <div class="gzwm">
+                                <div class="layui-inline">
+                                    <img th:src="@{/assets/img/1.gif} "alt="头像.png" width="100px"
+                                         class="layui-circle"/>
+                                </div>
+                                <div class="t-t">
+                                    <a href="" style="margin-top: 5px;font-size: 20px" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <p style="margin-top: 5px;font-size: 17px" th:text="${info.company_name}"></p>
+                                    <span style="margin-top: 5px" th:text="${info.city_name}"><i class="fa fa-map-marker"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab layui-tab-card layui-article-cate layui-hide-xs" slot="infoLabel">
+                        <div class="layui-tab-content select-none">
+                            <div class="layui-tab-item layui-show layui-text">
+                                <audio class="audio" th:src="@{/music/1.mp3}"
+                                       controls="controls"></audio>
+                                <p>
+                                    <i class="layui-icon" style="font-size: 30px; color: red;"></i>
+                                    名企招聘，海外实习。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab layui-tab-card layui-article-cate layui-hide-xs">
+                        <div class="layui-tab-content select-none">
+                            <h3 class="tit">关注本站</h3>
+                            <div class="layui-tab-item layui-show layui-text">
+                                <img th:src="@{/assets/img/1.gif}" width="300px" height="250px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container代码 结束 -->
+    <div class="jzend"></div>
+    <footer>
+        <div class="footer">
+            <p>
+                <span><strong>&nbsp;</strong><strong>&nbsp;</strong> &nbsp;&nbsp;</span>
+            </p>
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span hidden="hidden" id="cityCode" th:text="${cityCode}"></span>
+            </p>
+            <p>
+                <br/>
+            </p>
+        </div>
+    </footer>
+</div>
+
+<script th:src="@{/plugins/layui/layui.js}"></script> <!--src="plugins/layui/layui.js"-->
+<script th:src="@{/plugins/code.js}"></script>
+<script th:inline="javascript">
+    layui.use(['laytpl', 'element', 'flow', 'carousel'], function () {
+        var carousel = layui.carousel;
+        //常规轮播
+        carousel.render({
+            elem: '#carousel',
+            width: '100%' //设置容器宽度
+            ,
+            arrow: 'always',
+            height: "470px"
+        });
+    });
+</script>
+</body>
+
+</html>

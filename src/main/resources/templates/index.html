@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta name="sogou_site_verification" content="9KZfhacIwS"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/frontend/base.css}">
+    <title>IT各大砖厂招聘信息网</title>
+    <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+</head>
+
+<body class="animated fadeIn">
+<div id="index-app" class="wrapper">
+    <header>
+        <div class="headtop"></div>
+        <div class="contenttop">
+            <div class="logo f_l"> IT各大砖厂招聘信息网</div>
+            <div class="blank"></div>
+            <nav>
+                <div class="navigation">
+                    <ul class="menu">
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(749)">长沙</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(530)">北京</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(538)">上海</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(763)">广州</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(765)">深圳</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" onclick="changeCity(653)">杭州</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--<SCRIPT type=text/javascript>-->
+            <!--// Navigation Menu-->
+            <!--$(function () {-->
+            <!--$(".menu ul").css({-->
+            <!--display: "none"-->
+            <!--}); // Opera Fix-->
+            <!--$(".menu li").hover(function () {-->
+            <!--$(this).find('ul:first').css({-->
+            <!--visibility: "visible",-->
+            <!--display: "none"-->
+            <!--}).slideDown("normal");-->
+            <!--}, function () {-->
+            <!--$(this).find('ul:first').css({-->
+            <!--visibility: "hidden"-->
+            <!--});-->
+            <!--});-->
+            <!--});-->
+
+            <!--function search() {-->
+            <!--var s = $('#keyboard').val();-->
+            <!--location.href = s === "" ? "/" : "/pages?searchStr=" + s;-->
+            <!--};-->
+
+            <!--function goto() {-->
+            <!--var url = window.location.href;-->
+            <!--var winObj = window.open('/api/qq?url=' + url, '_self');-->
+            <!--}-->
+            <!--</SCRIPT>-->
+
+        </div>
+    </header>
+    <div class="jztop"></div>
+    <div id="main-body" class="layui-container">
+        <div class="layui-row layui-col-space10">
+            <div id="article-list" class="layui-col-md9">
+                <div>
+                    <div class="layui-carousel" id="carousel" lay-filter="carousel">
+                        <div carousel-item="">
+                            <div><img th:src="@{/assets/img/2.jpg}" alt="kLj1UO.jpg" border="0" width="1000px"/></div>
+                            <div><img th:src="@{/assets/img/3.jpg}" alt="kLjPbV.jpg" border="0" width="1000px"/></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="layui-tab layui-tab-card ">
+                        <div class="layui-tab-content select-none">
+                            <a href="javascript:;">
+                                <fieldset class="layui-elem-field layui-field-title"
+                                          style=" border-color: rgb(193, 191, 191);">
+                                    <legend>开发圣经</legend>
+                                    <div class="layui-field-box" style="height: 130px">
+                                        面向谷歌编程.
+                                    </div>
+                                </fieldset>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="layui-tab layui-tab-card ">
+                        <div class="layui-tab-content select-none">
+                            <a href="javascript:;">
+                                <fieldset class="layui-elem-field layui-field-title"
+                                          style=" border-color: rgb(193, 191, 191);">
+                                    <legend>资源下载</legend>
+                                    <div class="layui-field-box" style="height: 130px">
+                                        各大面试题集，等你下载。
+                                    </div>
+                                </fieldset>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4">
+                    <div class="layui-tab layui-tab-card ">
+                        <div class="layui-tab-content select-none">
+                            <a href="javascript:;">
+                                <fieldset class="layui-elem-field layui-field-title"
+                                          style=" border-color: rgb(193, 191, 191);">
+                                    <legend>面试宝典</legend>
+                                    <div class="layui-field-box" style="height: 130px">
+                                        2019年最全问答面试专题。
+                                    </div>
+                                </fieldset>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="tit">最新招聘信息</h3>
+
+                <div class="layui-collapse layui-panel layui-article" th:each="data,iterStat : ${dataList}">
+                    <div class="layui-colla-item">
+                        <div class="layui-colla-content layui-show layui-article">
+                            <fieldset class="layui-elem-field layui-field-title">
+                                <legend class="center-to-head">
+                                    <a th:id="${data.id}" onclick="getInfo(this)"><span
+                                            th:text="${data.jobName}">未知</span> </a>
+                                </legend>
+                                <div class="layui-field-box ">
+                                    <div class="layui-row">
+                                        <div class="layui-col-md1" align="right" th:text="${data.salary}">
+                                        </div>
+                                        <div class="layui-col-md1" align="right"><span th:text="${data.city_name}">Sebastian</span>
+                                        </div>
+                                        <div class="layui-col-md1" align="right" th:text="${data.workingExp}">
+                                        </div>
+                                        <div class="layui-col-md1" align="right" th:text="${data.eduLevel_name}">
+                                        </div>
+                                        <div class="layui-col-md6" align="right">
+                                            <a href="javascript:void(0)" th:text="${data.company_name}"></a>
+                                        </div>
+                                        <div class="layui-col-md2" align="right"><span
+                                                th:text="'公司规模：'+${data.companySize}">Sebastian</span></div>
+                                    </div>
+
+                                    <div class="layui-row layui-hide">
+                                        <div class="layui-col-md1" align="right" th:text="${data.salary}">
+                                        </div>
+                                        <div class="layui-col-md1" align="right"><span th:text="${data.city_name}">Sebastian</span>
+                                        </div>
+                                        <div class="layui-col-md1" align="right" th:text="${data.workingExp}">
+                                        </div>
+                                        <div class="layui-col-md1" align="right" th:text="${data.eduLevel_name}">
+                                        </div>
+                                        <div class="layui-col-md6" align="right">
+                                            <a href="javascript:void(0)" th:text="${data.company_name}"></a>
+                                        </div>
+                                        <div class="layui-col-md2" align="right"><span
+                                                th:text="'公司规模：'+${data.companySize}">Sebastian</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="operation">
+                                    <div class="tags" th:each="d : ${data.welfareList}">
+                                        <span class="layui-badge-rim"><i class="fa fa-tag" th:text="${d}">无</i> </span>
+                                    </div>
+                                    <div class="info">
+                                        <span class="views"><i class="fa fa-thermometer-half"></i>1650 <code
+                                                style="font-family: cursive;">℃</code></span>
+                                        <span class="dtime" th:text="${data.createDate}">2019-4-29</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div align="center" style="padding-top: 20px">
+                    <div id="mylaypage">
+                        <button th:onclick="|javascript:changePage(${currentPage - 1 })|"
+                                th:class="${currentPage == 1}?'layui-btn layui-btn-lg layui-btn-radius layui-btn-normal layui-btn-disabled':'layui-btn layui-btn-lg layui-btn-radius layui-btn-normal'">
+                            <i class="layui-icon layui-icon-prev" style="font-size: 30px; color: #e5e5e5;"></i>
+                        </button>
+                        <span class="layui-badge-rim" th:text="${currentPage}+'/'+${totalPage}"></span>
+                        <button th:onclick="|javascript:changePage(${currentPage + 1 })|"
+                                th:class="${currentPage == totalPage}?'layui-btn layui-btn-lg layui-btn-radius layui-btn-normal layui-btn-disabled':'layui-btn layui-btn-lg layui-btn-radius layui-btn-normal'">
+                            <i class="layui-icon layui-icon-next" style="font-size: 30px; color: #e5e5e5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div id="affix-side">
+                    <div class="layui-tab layui-tab-card layui-article-cate layui-hide-xs" slot="callme">
+                        <div class="layui-tab-content select-none">
+                            <div class="gzwm">
+
+                                <div class="layui-inline">
+                                    <img th:src="@{/assets/img/1.gif} " alt="头像.png" width="100px"
+                                         class="layui-circle"/>
+                                </div>
+                                <div class="t-t">
+                                    <a href="" style="margin-top: 5px;font-size: 20px" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <p style="margin-top: 5px;font-size: 18px">做自己想做的事，努力把它做好。</p>
+                                    <span style="margin-top: 5px"><i class="fa fa-map-marker"></i>长沙</span>
+                                </div>
+                                <div class="t-i" style="font-size: 30px">
+                                    <a href="#"  rel="nofollow"><i
+                                            class="fa fa-weibo fa-fw"></i></a>
+                                    <a href="#" rel="nofollow"><i
+                                            class="fa fa-qq fa-fw"></i></a>
+                                    <a href="#" rel="nofollow"><i
+                                            class="fa fa-envelope fa-fw"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    '
+                    <div class="layui-tab layui-tab-card layui-article-cate layui-hide-xs" slot="infoLabel">
+                        <div class="layui-tab-content select-none">
+                            <div class="layui-tab-item layui-show layui-text">
+                                <audio class="audio" autoplay="autoplay"
+                                       controls="controls">
+                                    <source th:src="@{/music/1.mp3}" type="audio/mp3"/>
+                                </audio>
+                                <p>
+                                    <i class="layui-icon" style="font-size: 30px; color: red;"></i>
+                                    名企招聘，海外实习。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-tab layui-tab-card layui-tags">
+                        <div class="layui-tab-content select-none guidang">
+                            <h3 class="tit">热门职位</h3>
+                            <a href="javascript:void(0);">大数据工程师</a>
+                            <a href="javascript:void(0);">Java架构师</a>
+                            <a href="javascript:void(0);">Spark工程师</a>
+                            <a href="javascript:void(0);">数据分析工程师</a>
+                            <a href="javascript:void(0);">flink工程师</a>
+                        </div>
+                    </div>
+                    <div class="layui-tab layui-tab-card layui-tags">
+                        <div class="layui-tab-content select-none tabs">
+                            <h3 class="tit">热门搜索词</h3>
+                            <a href="javascript:void(0);">Java</a>
+                            <a href="javascript:void(0);">Spark</a>
+                            <a href="javascript:void(0);">Scala</a>
+                            <a href="javascript:void(0);">Python</a>
+                        </div>
+                    </div>
+                    <div class="layui-tab layui-tab-card layui-master-recommend">
+                        <div class="layui-tab-content select-none">
+                            <h3 class="tit">浏览排行</h3>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+                                    <span class="layui-badge">1</span> &nbsp; &nbsp;Spark工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-orange">2</span> &nbsp; &nbsp;JAVA开发工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-green">3</span> &nbsp; &nbsp;数据库开发工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">4</span> &nbsp; &nbsp;Java架构师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">5</span> &nbsp; &nbsp;大数据运维工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">6</span> &nbsp; &nbsp;Java实习生</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">7</span> &nbsp; &nbsp;LINUX运维工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">8</span> &nbsp; &nbsp;C++工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">9</span> &nbsp; &nbsp;Scala工程师</a>
+
+                            </div>
+                            <div class="lot">
+                                <a href="javascript:void(0);">
+
+                                    <span class="layui-badge layui-bg-gray">10</span> &nbsp; &nbsp;python工程师</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab layui-tab-card">
+                        <div class="tuwen">
+                            <h3 class="tit">马独秀专栏</h3>
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);"><i><img
+                                            th:src="@{/assets/img/1.gif}"></i><b>小</b></a>
+                                    <p><span class="tulanmu">资源下载</span><span class="tutime">2019-02-20</span></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"><i><img
+                                            th:src="@{/assets/img/1.gif}"></i><b>样</b></a>
+                                    <p><span class="tulanmu">资源下载</span><span class="tutime">2019-02-08</span></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"><i><img
+                                            th:src="@{/assets/img/1.gif}"></i><b>继</b></a>
+                                    <p><span class="tulanmu">资源下载</span><span class="tutime">2019-02-10</span></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"><i><img
+                                            th:src="@{/assets/img/1.gif}"></i><b>续</b></a>
+                                    <p><span class="tulanmu">资源下载</span><span class="tutime">2019-02-07</span></p>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"><i><img
+                                            th:src="@{/assets/img/1.gif}"></i><b>爬</b></a>
+                                    <p><span class="tulanmu">资源下载</span><span class="tutime">2019-02-04</span></p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="layui-tab layui-tab-card">
+                        <h3 class="tit">最近访客</h3>
+                        <div class="inner">
+                            <dl class="vistor">
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>hhhh</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>you a</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>李辰逸</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite> 生活如此多娇</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>有志者，事竟成</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>H_Y</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>越狱的围巾</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>骑虎漂移゛</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>kiwipeach</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>TaZ、Rainbow、的Yang</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>您</cite></a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:void(0)">
+                                        <img th:src="@{/assets/img/1.gif}"><cite>理想三旬</cite></a>
+                                </dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                    <div class="layui-tab layui-tab-card layui-article-cate layui-hide-xs">
+                        <div class="layui-tab-content select-none">
+                            <h3 class="tit">关注本站</h3>
+                            <div class="layui-tab-item layui-show layui-text">
+                                <img th:src="@{/assets/img/1.gif}" width="300px" height="250px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container代码 结束 -->
+    <div class="jzend"></div>
+    <footer>
+        <div class="footer">
+            <p>
+                <span><strong>&nbsp;</strong><strong>&nbsp;</strong> &nbsp;&nbsp;</span>
+            </p>
+            <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span hidden="hidden" id="cityCode" th:text="${cityCode}"></span>
+            </p>
+            <p>
+                <br/>
+            </p>
+        </div>
+    </footer>
+</div>
+
+<script th:src="@{/plugins/layui/layui.js}"></script> <!--src="plugins/layui/layui.js"-->
+<script th:src="@{/plugins/code.js}"></script>
+<script th:inline="javascript">
+    layui.use(['laytpl', 'element', 'flow', 'carousel'], function () {
+        var carousel = layui.carousel;
+        //常规轮播
+        carousel.render({
+            elem: '#carousel',
+            width: '100%' //设置容器宽度
+            ,
+            arrow: 'always',
+            height: "470px"
+        });
+    });
+</script>
+</body>
+
+</html>
